@@ -9,14 +9,17 @@ var handlers = {
     var options = {
       // method: 'GET',
       // uri: 'https://www.codewars.com/api/v1/users/nofootnotes',
-      method: 'POST',
+      // method: 'POST',
       uri: 'https://www.codewars.com/api/v1/code-challenges/javascript/train',
       headers: {
-        // Authorization: tokens.codewars.claire
-        Authorization: tokens.codewars.anni.token
+        Authorization: tokens.codewars.claire.token,
+        // Authorization: tokens.codewars.simon.token,
+      },
+      form: {
+        strategy: 'kyu_5_workout'
       }
     };
-    request(options, function (err, res, body) {
+    request.post(options, function (err, res, body) {
       if (err) return err;
       console.log(JSON.parse(body));
     });
