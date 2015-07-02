@@ -11,7 +11,8 @@ var handlers = {
     var options = {
       uri: 'https://www.codewars.com/api/v1/code-challenges/javascript/train',
       headers: {
-        Authorization: tokens.codewars.claire.token,
+        Authorization: tokens.codewars.anni.token, // get token from db
+
       },
       form: {
         strategy: 'kyu_' + kyuLevel + '_workout'
@@ -21,25 +22,24 @@ var handlers = {
       if (err) return err;
       var data = JSON.parse(body);
 
-      var cwData = {
+       var cwData = {
         level: data.rank,
         name: data.name,
         link: data.href,
         description: data.description,
-        id: data.session.projectId,
+        //id: data.session.projectId,
         setup: data.session.setup
       };
-//      console.log("SavedData: ",cwData);
-        return reply(cwData.level);    
+      console.log("All data: ",data); // send kata id -> to database 
+        //return reply(cwData.level);
+
     });
-
-
   },
 
   user: function (err, res, body) {
     var options = {
       method: 'GET',
-      uri: 'https://www.codewars.com/api/v1/users/' + tokens.codewars.anni.username,
+      uri: 'https://www.codewars.com/api/v1/users/' + tokens.codewars.anni.username, 
       headers: {
         Authorization: tokens.codewars.anni.token
       }
@@ -47,6 +47,7 @@ var handlers = {
     request(options, function (err, res, body) {
       if (err) return err;
       console.log(JSON.parse(body));
+
     });
   }
 
