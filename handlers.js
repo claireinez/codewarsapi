@@ -5,7 +5,10 @@ var tokens = require('./tokens.json');
 
 var handlers = {
 
-  newkata: function (err, res, body) {
+  newkata: function (req, res) {
+    var path = req.params;
+    var kyuLevel = path.kyuLevel;
+    console.log(kyuLevel);
     var options = {
       // method: 'GET',
       // uri: 'https://www.codewars.com/api/v1/users/nofootnotes',
@@ -16,7 +19,8 @@ var handlers = {
         // Authorization: tokens.codewars.simon.token,
       },
       form: {
-        strategy: 'kyu_5_workout'
+        // strategy: 'kyu_4_workout'
+        strategy: 'kyu_' + kyuLevel + '_workout'
       }
     };
     request.post(options, function (err, res, body) {
