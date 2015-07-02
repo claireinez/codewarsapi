@@ -23,15 +23,16 @@ var handlers = {
       var data = JSON.parse(body);
 
        var cwData = {
-        level: data.rank,
         name: data.name,
-        link: data.href,
+        level: data.rank,
         description: data.description,
         id: data.session.projectId,
-        setup: data.session.setup
+        setup: data.session.setup,
+        link: data.href
       };
-      console.log("All data: ",cwData); // send kata id -> to database 
-        //return reply(cwData.level);
+      console.log("All data: ",cwData); // Data to return to the page // 
+      console.log("href: ",cwData.link); // The  kata ID  need to be sent to DB plus solved : false 
+       //return reply(cwData.level);
 
     });
   },
