@@ -1,9 +1,10 @@
 var handlers = require('./handlers.js');
 
 var routes = [
+
   {
     method: 'GET',
-    path: '/newkata',
+    path: '/kyu/{kyuLevel}',
     handler: handlers.newkata
   },
 
@@ -12,6 +13,7 @@ var routes = [
     path: '/user',
     handler: handlers.user
   }
+
 ];
 
 module.exports = routes;
