@@ -27,16 +27,16 @@ var handlers = {
         name: data.name,
         link: data.href,
         description: data.description,
-        //id: data.session.projectId,
+        id: data.session.projectId,
         setup: data.session.setup
       };
-      console.log("All data: ",data); // send kata id -> to database 
+      console.log("All data: ",cwData); // send kata id -> to database 
         //return reply(cwData.level);
 
     });
   },
 
-  user: function (err, res, body) {
+  user: function (req, res) {
     var options = {
       method: 'GET',
       uri: 'https://www.codewars.com/api/v1/users/' + tokens.codewars.anni.username, 
