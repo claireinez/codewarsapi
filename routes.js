@@ -8,7 +8,7 @@ var routes = [
   },
 
   {
-    method: 'GET',
+    method: 'POST',
     path: '/user',
     handler: handlers.user
   }
