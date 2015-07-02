@@ -8,7 +8,20 @@ var handlers = {
   newkata: function (req, res) {
     var path = req.params;
     var kyuLevel = path.kyuLevel;
+    var formObject;
     console.log(kyuLevel);
+
+    if (kyuLevel === 'random' || kyuLevel === 'default') {
+      formObject = {
+        strategy: kyuLevel
+      };
+    }
+    else {
+      formObject = {
+        strategy: 'kyu_' + kyuLevel + '_workout'
+      };
+    }
+
     var options = {
       // method: 'GET',
       // uri: 'https://www.codewars.com/api/v1/users/nofootnotes',
@@ -18,10 +31,8 @@ var handlers = {
         Authorization: tokens.codewars.claire.token,
         // Authorization: tokens.codewars.simon.token,
       },
-      form: {
-        // strategy: 'kyu_4_workout'
-        strategy: 'kyu_' + kyuLevel + '_workout'
-      }
+      // strategy: 'kyu_4_workout'
+      form: formObject
     };
     request.post(options, function (err, res, body) {
       if (err) return err;
