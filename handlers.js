@@ -1,5 +1,4 @@
 var request = require('request');
-var server = require('./server.js');
 var tokens = require('./tokens.json');
 // var fs = require('fs');
 
@@ -8,36 +7,33 @@ var handlers = {
   newkata: function (req, res) {
     var path = req.params;
     var kyuLevel = path.kyuLevel;
-    var formObject;
     console.log(kyuLevel);
-
-    if (kyuLevel === 'random' || kyuLevel === 'default') {
-      formObject = {
-        strategy: kyuLevel
-      };
-    }
-    else {
-      formObject = {
-        strategy: 'kyu_' + kyuLevel + '_workout'
-      };
-    }
-
     var options = {
-      // method: 'GET',
-      // uri: 'https://www.codewars.com/api/v1/users/nofootnotes',
-      // method: 'POST',
       uri: 'https://www.codewars.com/api/v1/code-challenges/javascript/train',
       headers: {
         Authorization: tokens.codewars.claire.token,
-        // Authorization: tokens.codewars.simon.token,
       },
-      // strategy: 'kyu_4_workout'
-      form: formObject
+      form: {
+        strategy: 'kyu_' + kyuLevel + '_workout'
+      }
     };
     request.post(options, function (err, res, body) {
       if (err) return err;
-      console.log(JSON.parse(body));
+      var data = JSON.parse(body);
+
+      var cwData = {
+        level: data.rank,
+        name: data.name,
+        link: data.href,
+        description: data.description,
+        id: data.session.projectId,
+        setup: data.session.setup
+      };
+//      console.log("SavedData: ",cwData);
+        return reply(cwData.level);    
     });
+
+
   },
 
   user: function (err, res, body) {
@@ -50,7 +46,7 @@ var handlers = {
     };
     request(options, function (err, res, body) {
       if (err) return err;
-      console.log(JSON.parse(body));
+      console.log(JSON.parse(body.session.setup));
     });
   }
 
