@@ -38,4 +38,4 @@ var newKataDispatch = decorate({params:{kyuLevel: 8}}, {}, handlers.newKata);
 Shot.inject(newKataDispatch, {method: 'GET'}, function(response){expect(reply).to.equal(8);});
 
 
-Shot.inject(handlers.user, )
+Shot.inject(handlers.user);

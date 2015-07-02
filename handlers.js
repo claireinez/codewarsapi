@@ -46,7 +46,7 @@ var handlers = {
     };
     request(options, function (err, res, body) {
       if (err) return err;
-      console.log(JSON.parse(body.session.setup));
+      console.log(JSON.parse(body));
     });
   }
 
